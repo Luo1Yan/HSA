@@ -1,0 +1,32 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Data, features, checkpoints, and local experiment outputs
+datasets/
+checkpoints/
+pretrained_weights/
+outputs/
+logs/
+wandb/
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
