@@ -1,72 +1,166 @@
 <div align="center">
 
-# Latent Multimodal Knowledge via Hub-Spectral Activation
+# Hub-Spectral Activation of Latent Multimodal Knowledge
 
 **HSA · Recovering and activating cross-modal relations in frozen representations**
 
 Ying Guo, Haidong Chen, Linrui Xu, Xiaohao Liu, Chuancheng Shi, Canran Xiao, Dan Zhang, Fei Shen, Li Shen, Tat-Seng Chua
 
-**English** | [简体中文](README_zh-CN.md)
-
-[Overview](#overview) · [Method](#method) · [Results](#main-results) · [Release status](#release-status)
+[Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#data-preparation) · [Usage](#usage)
 
 </div>
 
 ## Overview
 
-Hub-based multimodal binding connects different modalities through a shared hub. Although this reduces the need for pairwise supervision, separately trained hub connections do not guarantee reliable alignment between two modalities that were never directly trained together.
+Hub-based multimodal binding connects modalities through a shared hub. What cross-modal knowledge can be recovered between two modalities that were never directly trained together?
 
-**What cross-modal knowledge can be recovered from these two observed hub connections?**
-
-We introduce **Hub-Spectral Activation (HSA)**, a closed-form method that recovers and activates the **hub-readable component of latent multimodal knowledge**. HSA estimates a relation from the second-order statistics of two trained hub edges, locates its paired spectral carriers, and turns their coordinates into scores for bidirectional retrieval and prototype classification.
+**Hub-Spectral Activation (HSA)** recovers and activates the hub-readable component of latent multimodal knowledge from the second-order statistics of two observed hub edges. It identifies paired spectral carriers and turns their coordinates into scores for bidirectional retrieval and prototype classification.
 
 ![From multimodal training to Hub-Spectral Activation](assets/overview.png)
 
-HSA operates after backbone training, with **frozen encoders, no target-pair supervision, and no gradient optimization**. Its relation fitting and calibration use the observed source hub edges.
+### Key features
 
-## Key ideas
-
-- **A precise recoverability boundary.** Under a second-order source model, we characterize the hub-readable relation, establish conditions for exact recovery of the complete source-induced relation, and bound the dimension of its hub-readable component by the hub covariance rank.
-- **Paired spectral carriers.** Leading paired directions express the recovered relation in coordinates that support cross-modal comparison.
-- **Reliable task readout.** Reliability-weighted carrier evidence is combined with source-gated candidate resolution and mismatch calibration.
-- **One fitted state across tasks.** When encoder coordinates are compatible and evaluation queries do not overlap fitting samples, the same fitted HSA state supports retrieval and prototype classification.
+- **Frozen representations:** no backbone updates, target-pair supervision, or gradient optimization for HSA.
+- **Closed-form relation recovery:** compose and standardize the statistics of the two observed hub edges.
+- **Paired spectral carriers:** combine reliability-weighted matching evidence with source-gated candidate resolution.
+- **Two task readouts:** bidirectional retrieval and B-to-A prototype classification.
 
 ## Method
 
 ![HSA method overview](assets/method.png)
 
-1. **Recover the relation.** Estimate moments on the two observed hub edges, compose them through the regularized hub covariance, and standardize the resulting cross-modal relation.
-2. **Locate the carriers.** Extract paired spectral directions and project frozen target representations into carrier coordinates.
-3. **Form the readout.** Combine reliability-weighted matching evidence with a source-gated candidate-resolution score; calibrate their scales using source-derived mismatches.
-4. **Score the task.** Rank candidates in either retrieval direction or score class prototypes for classification.
+1. **Recover the relation.** Compose hub-edge cross-covariances through the regularized hub covariance, then whiten the target spaces.
+2. **Identify paired carriers.** Extract spectral directions and project the frozen target representations into carrier coordinates.
+3. **Construct the score.** Combine the carrier score with candidate-resolution evidence, using a source-derived reliability gate and mismatch scales.
+4. **Read out the task.** Rank retrieval candidates or score a common bank of class prototypes.
+
+$$s_{\mathrm{HSA}}=s_C/\tau_C+g_Rs_R/\tau_R.$$
+
+All fitted quantities use source hub-edge features. Prototype classification uses class labels to construct the A-side prototype bank; test labels are used only for evaluation.
 
 ## Main results
 
-Experiments use [ImageBind](https://github.com/facebookresearch/ImageBind) and [LanguageBind](https://github.com/PKU-YuanGroup/LanguageBind).
+Results reported in the manuscript:
 
-| Task | Evaluation scope | Frozen cosine | HSA | Gain |
-|---|---|---:|---:|---:|
-| Bidirectional retrieval | 19 relations; mean Recall@10 | 18.27% | **31.15%** | **+12.88 points** |
-| Prototype classification | 11 relations; mean macro Top-1 | 29.01% | **52.43%** | **+23.42 points** |
+| Backbone | Retrieval relations | Frozen cosine R@10 | HSA R@10 | Classification relations | Frozen cosine macro Top-1 | HSA macro Top-1 |
+|---|---:|---:|---:|---:|---:|---:|
+| ImageBind | 9 | 10.80% | **24.90%** | 6 | 16.31% | **44.01%** |
+| LanguageBind | 10 | 25.00% | **36.79%** | 5 | 44.25% | **62.53%** |
+| All | 19 | 18.27% | **31.15%** | 11 | 29.01% | **52.43%** |
 
-Retrieval is averaged equally across relations. Classification first averages Top-1 accuracy equally across classes within each relation, then averages equally across relations. The classification results above use the designated classification source features and protocol.
+Retrieval averages Recall@10 across both directions and then equally across relations. Classification averages Top-1 accuracy equally across observed classes within each relation and then equally across relations. The task-specific source features and splits follow the manuscript.
 
-For **exact reuse of the retrieval-fitted state**, eight compatible relations across five datasets have non-overlapping evaluation queries. HSA reaches **48.01%** macro Top-1, compared with **26.46%** for frozen cosine and **48.79%** for separately fitted HSA on those same eight relations.
+## Installation
 
-Controlled correspondence interventions and carrier comparisons identify valid within-edge correspondence and leading paired spectral directions as key sources of the retrieval gain.
+Python 3.10 or later is required. CPU evaluation is supported; a CUDA-enabled PyTorch installation can accelerate retrieval scoring.
 
-## Release status
+```bash
+git clone https://github.com/Luo1Yan/HSA.git
+cd HSA
+python -m pip install -r requirements.txt
+```
 
-This initial release contains the project introduction, method overview, and headline results. **Implementation and evaluation code will follow.**
+This implementation operates on pre-extracted features from frozen [ImageBind](https://github.com/facebookresearch/ImageBind) and [LanguageBind](https://github.com/PKU-YuanGroup/LanguageBind) encoders. Backbone training is outside the evaluation entry point.
 
-- [x] English and Chinese project descriptions
-- [x] Overview and method figures
-- [ ] HSA implementation and evaluation scripts
-- [ ] Environment setup and data preparation instructions
+## Data preparation
 
-## Related resources
+Main experiments cover VGGSound, UCF101, NYUv2, TartanRGBT, Ego4D, BatVision, MAVD, UTD-MHAD, Caltech Aerial RGBT, and MSR-VTT. Dataset contents and encoder checkpoints are kept outside Git.
 
-- [ImageBind](https://github.com/facebookresearch/ImageBind)
-- [LanguageBind](https://github.com/PKU-YuanGroup/LanguageBind)
+**Prepared feature archives are not yet publicly hosted.** With local archives in the format below, prepare and validate them using:
 
-For questions about this project, please open a [GitHub issue](https://github.com/Luo1Yan/HSA/issues).
+```bash
+bash datasets.sh --from /path/to/prepared/features
+bash datasets.sh --check
+```
+
+The script validates all 30 main-experiment archives before copying them. It preserves existing files and stops on conflicting contents. `bash datasets.sh --help` describes its options.
+
+### Feature layout
+
+```text
+datasets/
+├── retrieval/
+│   ├── imagebind/<relation>.npz
+│   └── languagebind/<relation>.npz
+└── classification/
+    ├── imagebind/<relation>.npz
+    └── languagebind/<relation>.npz
+```
+
+Use `python run.py --list` for the exact 19 retrieval and 11 classification relation IDs. Each archive contains plain NumPy arrays; pickle objects are unsupported.
+
+| Array | Shape | Meaning |
+|---|---|---|
+| `a_train`, `h_a_train` | N × d, N × h | Paired A-H source-edge features |
+| `b_train`, `h_b_train` | N × d, N × h | Paired B-H source-edge features |
+| `a_test`, `b_test` | M × d each | Retrieval gallery/query features, with corresponding rows |
+| `positive_labels` | M (optional) | Retrieval positive-group labels; omit for instance matching |
+| `prototypes` | C × d | Classification A-side prototype bank |
+| `queries` | M × d | Classification B-side test queries |
+| `labels` | M integers | Query labels indexing prototype rows, from 0 to C−1 |
+
+Retrieval archives need the test arrays; classification archives need the prototype/query/label arrays. Source features must follow the original task's extraction and normalization protocol. Classification normalizes source rows, prototypes, and queries. Retrieval uses the supplied fitting coordinates; frozen cosine applies row normalization directly to test features.
+
+For classification, average normalized A-side training features within each class and normalize each mean. The ImageBind VGGSound text-audio relation uses the manuscript's fixed 80-template text-prompt prototypes. Keep the original splits and prototype banks to compare with the reported results.
+
+## Usage
+
+### Main experiments
+
+```bash
+# Default: 19 retrieval relations and 11 prototype-classification relations
+python run.py
+
+# Retrieval only
+python run.py --task retrieval --device cuda
+
+# Prototype classification only
+python run.py --task classification
+
+# One main relation
+python run.py --task classification --backbone imagebind \
+  --relation depth_imu__utd --output outputs/utd.json
+```
+
+The runner evaluates **HSA and frozen cosine**. Its default inventory contains only the main retrieval and prototype-classification experiments. Results include per-relation metrics, both retrieval directions, fitted ranks, reliability gates, mismatch scales, and relation-weighted aggregates. Outputs use fractions in [0, 1]. A selected subset is averaged over that subset and reports its relation count.
+
+The manuscript tables include additional comparison methods; this compact implementation provides the HSA and frozen-cosine paths. Mechanism analyses and ablations are outside the default runner.
+
+### Configuration
+
+All HSA fitting settings match the archived main implementation: trace-scaled ridge 0.5, rank threshold multiplier 2, maximum rank 256, rank-null seed 142, 256 coordinate permutations with seed 42 and quantile 0.95, and mismatch seeds 42–46. Retrieval scoring uses float32 tensors; covariance and spectral calculations retain the archived numerical conventions.
+
+For a custom data location or scoring batch size:
+
+```bash
+python run.py --data-root /path/to/features --batch-size 128 \
+  --output outputs/main.json
+```
+
+## Project structure
+
+```text
+HSA/
+├── README.md
+├── hsa.py             # Relation fitting, calibration, and task readouts
+├── run.py             # Main experiment inventory and evaluation
+├── datasets.sh        # Feature preparation and validation
+├── requirements.txt
+└── assets/
+    ├── overview.png
+    └── method.png
+```
+
+## Citation
+
+```bibtex
+@misc{guo2026hsa,
+  title={Hub-Spectral Activation of Latent Multimodal Knowledge},
+  author={Guo, Ying and Chen, Haidong and Xu, Linrui and Liu, Xiaohao and
+          Shi, Chuancheng and Xiao, Canran and Zhang, Dan and Shen, Fei and
+          Shen, Li and Chua, Tat-Seng},
+  year={2026},
+  note={Manuscript},
+  url={https://github.com/Luo1Yan/HSA}
+}
+```

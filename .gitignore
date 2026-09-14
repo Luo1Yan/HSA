@@ -30,3 +30,10 @@ wandb/
 Thumbs.db
 .idea/
 .vscode/
+
+# Feature archives
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.tar.gz
