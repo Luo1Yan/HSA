@@ -6,7 +6,7 @@
 
 Ying Guo, Haidong Chen, Linrui Xu, Xiaohao Liu, Chuancheng Shi, Canran Xiao, Dan Zhang, Fei Shen, Li Shen, Tat-Seng Chua
 
-[Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#datasets) · [Usage](#usage)
+[Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#datasets) · [Usage](#usage) · [Structure](#project-structure)
 
 </div>
 
@@ -103,6 +103,26 @@ Choose a compatible [PyTorch GPU build](https://pytorch.org/get-started/previous
 ```bash
 python run.py --check-data
 python run.py --device cuda --output outputs/main.json
+```
+
+## Project structure
+
+```text
+HSA/
+  download.py         # Download original data and encoder weights
+  extract.py          # Prepare inputs and extract frozen features
+  run.py              # Fit HSA and evaluate retrieval/classification
+  hsa.py              # HSA method implementation
+  protocols.py        # Shared experiment selection and configuration
+  configs/            # Sample IDs, splits, prompts and download sources
+  environments/       # Extraction environment dependencies
+  requirements.txt    # Dependencies for evaluation only
+  tests/              # Automated checks
+  assets/             # Overview and method figures
+  licenses/           # License files
+  datasets/           # Local raw data and features (generated)
+  models/             # Local encoder source and weights (downloaded)
+  outputs/            # Evaluation results (generated)
 ```
 
 ## Citation
