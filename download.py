@@ -224,6 +224,8 @@ def main():
     exclusive.add_argument("--data-only", action="store_true")
     parser.add_argument("--fetch", action="store_true", help="Execute the displayed download plan")
     parser.add_argument("--no-unpack", action="store_true", help="Keep downloaded original archives compressed")
+    parser.add_argument("--skip-manual", action="store_true",
+                        help="Download public resources while leaving access-controlled datasets to the user")
     args = parser.parse_args()
     try:
         selected = plan(args)
@@ -237,6 +239,9 @@ def main():
             return
         failures = []
         for name, resource, destination in selected:
+            if resource["kind"] == "manual" and args.skip_manual:
+                print(f"Manual dataset: {name}; use the access instructions above and place files in {destination}", flush=True)
+                continue
             try:
                 acquire(resource, destination, not args.no_unpack)
             except (OSError, ValueError, RuntimeError, urllib.error.URLError) as exc:

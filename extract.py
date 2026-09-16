@@ -2,7 +2,6 @@
 
 One shared encoder, observation cache and task builder serve all datasets.
 Dataset adapters retain the preprocessing used by the corresponding experiment.
-See THIRD_PARTY.md for the CMCL, ImageBind and LanguageBind provenance.
 """
 from __future__ import annotations
 

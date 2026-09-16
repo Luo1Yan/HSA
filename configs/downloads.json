@@ -486,7 +486,7 @@
       {
         "kind": "multipart",
         "url": "https://huggingface.co/datasets/xhLiu/MM_eval",
-        "label": "Original MSR-VTT videos from the PMRL mirror",
+        "label": "MSR-VTT video archive",
         "parts": [
           {
             "filename": "MSRVTT.tar.part-000",
