@@ -1,0 +1,642 @@
+{
+  "datasets": {
+    "utd-mhad": [
+      {
+        "kind": "http",
+        "url": "https://personal.utdallas.edu/~kehtar/UTD-MAD/RGB.zip",
+        "filename": "RGB.zip",
+        "unpack": true
+      },
+      {
+        "kind": "http",
+        "url": "https://personal.utdallas.edu/~kehtar/UTD-MAD/Depth.zip",
+        "filename": "Depth.zip",
+        "unpack": true,
+        "bytes": 126457699,
+        "sha256": "b1a22ebd299ab8f6322f98a0451bd356e377d5c2ab0b4f4df5ef967bb0549f0c"
+      },
+      {
+        "kind": "http",
+        "url": "https://personal.utdallas.edu/~kehtar/UTD-MAD/Inertial.zip",
+        "filename": "Inertial.zip",
+        "unpack": true,
+        "bytes": 5344156,
+        "sha256": "1900de05775c04626dee30b34638b79dd739d481786f0a788f2fbb00663abea4"
+      }
+    ],
+    "ucf101": [
+      {
+        "kind": "hf",
+        "repo": "NoahMartinezXiang/2013_UCF101",
+        "revision": "930c89aa9cae0ad9c3290c36ae991d8b95b7a4bb",
+        "patterns": [
+          "UCF101.zip"
+        ],
+        "unpack": true
+      }
+    ],
+    "nyuv2": [
+      {
+        "kind": "hf",
+        "repo": "sayakpaul/nyu_depth_v2",
+        "revision": "50579a0b591445f91bf7269b28611ad1cc6a05d2",
+        "patterns": [
+          "data/*.tar"
+        ],
+        "collections": [
+          "nyuv2-cmcl"
+        ]
+      },
+      {
+        "kind": "http",
+        "url": "https://horatio.cs.nyu.edu/mit/silberman/nyu_depth_v2/nyu_depth_v2_labeled.mat",
+        "filename": "nyu_depth_v2_labeled.mat",
+        "collections": [
+          "nyuv2-official"
+        ],
+        "bytes": 2972037809
+      }
+    ],
+    "vggsound": [
+      {
+        "kind": "hf",
+        "repo": "Loie/VGGSound",
+        "revision": "2ca3012ef85a60143a8f97b83a45bb1a7b5c2244",
+        "patterns": [
+          "vggsound_*.tar.gz",
+          "vggsound.csv"
+        ],
+        "unpack": true
+      },
+      {
+        "kind": "hf",
+        "repo": "txya900619/vggsound-16k",
+        "revision": "6f0ca13cf7d978405300fafee9e1393f955fe40d",
+        "patterns": [
+          "data/test-*.parquet"
+        ],
+        "collections": [
+          "vggsound-309"
+        ]
+      }
+    ],
+    "ego4d": [
+      {
+        "kind": "manual",
+        "url": "https://ego4d-data.org/docs/start-here/",
+        "instructions": "Obtain Ego4D v2 access under the official license. Place full_scale videos, IMU CSVs and annotations/narration.json below datasets/raw/ego4d. configs/ego4d.json lists the exact video IDs and IMU filenames."
+      }
+    ],
+    "batvision": [
+      {
+        "kind": "http",
+        "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/627779",
+        "filename": "Batvision_Dataset-0.tar.gz",
+        "bytes": 36858622568,
+        "unpack": true,
+        "label": "Official BatVision archive Batvision_Dataset-0.tar.gz"
+      },
+      {
+        "kind": "http",
+        "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/627781",
+        "filename": "Batvision_Dataset-1.tar.gz",
+        "bytes": 37038443764,
+        "unpack": true,
+        "label": "Official BatVision archive Batvision_Dataset-1.tar.gz"
+      },
+      {
+        "kind": "http",
+        "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/627782",
+        "filename": "Batvision_Dataset-2.tar.gz",
+        "bytes": 37196220168,
+        "unpack": true,
+        "label": "Official BatVision archive Batvision_Dataset-2.tar.gz"
+      },
+      {
+        "kind": "http",
+        "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/627790",
+        "filename": "Batvision_Dataset-3.tar.gz",
+        "bytes": 36560507311,
+        "unpack": true,
+        "label": "Official BatVision archive Batvision_Dataset-3.tar.gz"
+      },
+      {
+        "kind": "http",
+        "url": "https://entrepot.recherche.data.gouv.fr/api/access/datafile/627791",
+        "filename": "Batvision_Dataset-4.tar.gz",
+        "bytes": 20882628724,
+        "unpack": true,
+        "label": "Official BatVision archive Batvision_Dataset-4.tar.gz"
+      }
+    ],
+    "mavd": [
+      {
+        "kind": "multipart",
+        "url": "https://multimodal-distill.cs.uni-freiburg.de/",
+        "label": "Official MAVD (84 archive parts; non-commercial dataset license)",
+        "parts": [
+          {
+            "filename": "mavd_dataset.tar.gz.part-aa",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-aa"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ab",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ab"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ac",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ac"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ad",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ad"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ae",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ae"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-af",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-af"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ag",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ag"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ah",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ah"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ai",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ai"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-aj",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-aj"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ak",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ak"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-al",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-al"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-am",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-am"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-an",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-an"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ao",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ao"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ap",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ap"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-aq",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-aq"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ar",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ar"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-as",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-as"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-at",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-at"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-au",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-au"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-av",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-av"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-aw",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-aw"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ax",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ax"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ay",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ay"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-az",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-az"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ba",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ba"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bb",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bb"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bc",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bc"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bd",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bd"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-be",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-be"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bf",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bf"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bg",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bg"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bh",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bh"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bi",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bi"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bj",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bj"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bk",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bk"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bl",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bl"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bm",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bm"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bn",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bn"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bo",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bo"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bp",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bp"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bq",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bq"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-br",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-br"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bs",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bs"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bt",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bt"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bu",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bu"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bv",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bv"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bw",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bw"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bx",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bx"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-by",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-by"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-bz",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-bz"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ca",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ca"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cb",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cb"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cc",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cc"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cd",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cd"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ce",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ce"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cf",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cf"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cg",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cg"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ch",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ch"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ci",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ci"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cj",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cj"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ck",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ck"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cl",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cl"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cm",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cm"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cn",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cn"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-co",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-co"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cp",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cp"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cq",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cq"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cr",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cr"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cs",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cs"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-ct",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-ct"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cu",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cu"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cv",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cv"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cw",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cw"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cx",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cx"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cy",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cy"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-cz",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-cz"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-da",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-da"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-db",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-db"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-dc",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-dc"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-dd",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-dd"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-de",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-de"
+          },
+          {
+            "filename": "mavd_dataset.tar.gz.part-df",
+            "url": "https://multimodal-distill.cs.uni-freiburg.de/static/dist/mavd_dataset.tar.gz.part-df"
+          }
+        ]
+      }
+    ],
+    "caltech-rgbt": [
+      {
+        "kind": "http",
+        "url": "https://sdsc.osn.xsede.org/ini210004tommorrell/cks6g-ps927/data/2022-01-08_ArroyoSeco/2022-01-08-15-21-59/2022-01-08-15-21-59.bag",
+        "filename": "2022-01-08-15-21-59.bag",
+        "bytes": 2262422265
+      }
+    ],
+    "msrvtt": [
+      {
+        "kind": "multipart",
+        "url": "https://huggingface.co/datasets/xhLiu/MM_eval",
+        "label": "Original MSR-VTT videos from the PMRL mirror",
+        "parts": [
+          {
+            "filename": "MSRVTT.tar.part-000",
+            "url": "https://huggingface.co/datasets/xhLiu/MM_eval/resolve/ab1a5bc71de63c450f9d19a0380002824c99facd/MSRVTT.tar.part-000"
+          },
+          {
+            "filename": "MSRVTT.tar.part-001",
+            "url": "https://huggingface.co/datasets/xhLiu/MM_eval/resolve/ab1a5bc71de63c450f9d19a0380002824c99facd/MSRVTT.tar.part-001"
+          },
+          {
+            "filename": "MSRVTT.tar.part-002",
+            "url": "https://huggingface.co/datasets/xhLiu/MM_eval/resolve/ab1a5bc71de63c450f9d19a0380002824c99facd/MSRVTT.tar.part-002"
+          }
+        ]
+      }
+    ],
+    "tartan-rgbt": [
+      {
+        "kind": "hf",
+        "repo": "theairlabcmu/TartanRGBT",
+        "revision": "cafaed13bd4e55d3765cdeb0b1357c96d6ff2b79",
+        "patterns": [
+          "AnyThermal_data_distribution.csv",
+          "day*/undistorted*/rgb_in_thermal.zip",
+          "day*/undistorted*/thermal_left_rect_8.zip",
+          "day*/undistorted*/stereo_depth.zip"
+        ],
+        "unpack": true
+      }
+    ]
+  },
+  "models": {
+    "imagebind": [
+      {
+        "kind": "http",
+        "url": "https://github.com/facebookresearch/ImageBind/archive/53680b02d7e37b19b124fa37bae4b6c98c38f5be.zip",
+        "filename": "source.zip",
+        "unpack": true,
+        "extract_to": "source",
+        "strip_first": true
+      },
+      {
+        "kind": "http",
+        "url": "https://dl.fbaipublicfiles.com/imagebind/imagebind_huge.pth",
+        "filename": "imagebind_huge.pth",
+        "directory": "checkpoints"
+      }
+    ],
+    "languagebind": [
+      {
+        "kind": "http",
+        "url": "https://github.com/PKU-YuanGroup/LanguageBind/archive/7070c53375661cdb235801176b564b45f96f0648.zip",
+        "filename": "source.zip",
+        "unpack": true,
+        "extract_to": "source",
+        "strip_first": true
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Image",
+        "revision": "d8c2e37b439f4fc47c649dc8b90cdcd3a4e0c80e",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Image",
+        "modality": "image"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Depth",
+        "revision": "7b06680e540773a6538ceb5f595242b519d5932a",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Depth",
+        "modality": "text"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Thermal",
+        "revision": "538468abc0730b0ba8bb02a2a77fd929f862149e",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Thermal",
+        "modality": "thermal"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Video_FT",
+        "revision": "13f52c20ce666a7d017bcd00522039f4ab034a66",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Video_FT",
+        "modality": "video"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Audio_FT",
+        "revision": "4820c496563c46acfb1ff9a486fae5319f16257e",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Audio_FT",
+        "modality": "audio"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Video",
+        "revision": "84bed6cfe75703f5637ae1a11611c16a607eaa4a",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Video",
+        "modality": "video",
+        "variant": "msrvtt"
+      },
+      {
+        "kind": "hf",
+        "repo": "LanguageBind/LanguageBind_Audio",
+        "revision": "7aea390d580191c618631b28f4fe4ec74649cbfe",
+        "patterns": [
+          "*.json",
+          "*.txt",
+          "pytorch_model.bin"
+        ],
+        "repo_type": "model",
+        "directory": "checkpoints/Audio",
+        "modality": "audio",
+        "variant": "msrvtt"
+      }
+    ]
+  }
+}

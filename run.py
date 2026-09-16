@@ -9,26 +9,14 @@ import numpy as np
 import torch
 
 from hsa import HSA, l2_rows, topk_accuracy
+from protocols import selection_arguments, select, experiment_id, protocol_digest, experiments
 
 
-RETRIEVAL = {
-    "imagebind": (
-        "text_audio__vggsound", "text_thermal__tartan_category", "text_imu__ego4d_gyro",
-        "audio_depth__batvision", "audio_thermal__mavd", "audio_imu__ego4d_gyro",
-        "depth_thermal__tartan", "depth_imu__utd", "thermal_imu__caltech_gyro",
-    ),
-    "languagebind": (
-        "image-video", "image-thermal", "image-depth", "image-audio", "video-thermal",
-        "video-depth", "video-audio", "thermal-depth", "thermal-audio", "depth-audio",
-    ),
-}
-CLASSIFICATION = {
-    "imagebind": (
-        "text_audio__vggsound", "text_thermal__tartan_category", "text_imu__ego4d_gyro",
-        "audio_depth__batvision", "audio_imu__ego4d_gyro", "depth_imu__utd",
-    ),
-    "languagebind": ("image-depth", "video-thermal", "video-depth", "video-audio", "thermal-depth"),
-}
+RETRIEVAL, CLASSIFICATION = (
+    {backbone: tuple(row["relation"] for row in experiments(backbone=backbone, task=task))
+     for backbone in ("imagebind", "languagebind")}
+    for task in ("retrieval", "classification")
+)
 
 
 def inventory(task="all", backbone="all", relation=None):
@@ -121,34 +109,45 @@ def evaluate(data, task, device, batch_size):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-root", type=Path, default=Path("datasets"))
+    selection_arguments(parser)
     parser.add_argument("--output", type=Path, default=Path("outputs/main.json"))
-    parser.add_argument("--task", choices=("all", "retrieval", "classification"), default="all")
-    parser.add_argument("--backbone", choices=("all", "imagebind", "languagebind"), default="all")
-    parser.add_argument("--relation", help="Evaluate one relation ID from --list")
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--batch-size", type=int, default=256)
-    parser.add_argument("--list", action="store_true", help="List selected main experiments")
     parser.add_argument("--check-data", action="store_true", help="Validate feature archives without fitting")
     args = parser.parse_args()
-    selected = inventory(args.task, args.backbone, args.relation)
+    try:
+        recipes = select(args)
+    except ValueError as exc:
+        parser.error(str(exc))
+    selected = [(r["task"], r["backbone"], r["relation"]) for r in recipes]
     if not selected or args.batch_size < 1:
         parser.error("select a registered main relation and a positive batch size")
     paths = [(task, backbone, relation, args.data_root / task / backbone / (relation + ".npz"))
              for task, backbone, relation in selected]
     if args.list:
-        for task, backbone, relation, path in paths:
-            print(f"{task}/{backbone}/{relation}")
+        for recipe in recipes:
+            print(f"{experiment_id(recipe)}  dataset={recipe['dataset']}  "
+                  f"train={len(recipe['train_ids'])} test={len(recipe['test_ids'])}")
         return
     missing = [str(path) for _, _, _, path in paths if not path.is_file()]
     if missing:
-        parser.error("Missing prepared feature archives. See bash datasets.sh --help.\n" + "\n".join(missing))
+        parser.error("Missing features. Run python download.py, then python extract.py "
+                     "with the same selection.\n" + "\n".join(missing))
     rows = []
-    for task, backbone, relation, path in paths:
+    for recipe, (task, backbone, relation, path) in zip(recipes, paths):
         data = load_features(path, task)
+        metadata_path = path.with_suffix(".json")
+        if metadata_path.is_file():
+            metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+            if metadata.get("protocol_sha256") != protocol_digest(recipe):
+                parser.error(f"Feature protocol changed: {path}; rerun extract.py")
+        if len(data["a_train"]) != len(recipe["train_ids"]) or len(
+                data["a_test"] if task == "retrieval" else data["queries"]) != len(recipe["test_ids"]):
+            parser.error(f"Feature row counts differ from the registered experiment: {path}")
         print(f"{'Checked' if args.check_data else 'Evaluating'} {task}/{backbone}/{relation}", flush=True)
         if not args.check_data:
             row = {"task": task, "backbone": backbone, "relation": relation,
+                   "dataset": recipe["dataset"], "protocol_sha256": protocol_digest(recipe),
                    **evaluate(data, task, args.device, args.batch_size)}
             rows.append(row)
     if args.check_data:

@@ -17,6 +17,9 @@ datasets/
 checkpoints/
 pretrained_weights/
 outputs/
+models/
+*.sqlite3
+*.part
 logs/
 wandb/
 *.pt
