@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use HSA, please cite the paper in preferred-citation."
+type: software
+title: "HSA: Hub-Spectral Activation of Latent Multimodal Knowledge"
+repository-code: "https://github.com/Luo1Yan/HSA"
+url: "https://github.com/Luo1Yan/HSA"
+authors:
+  - family-names: Guo
+    given-names: Ying
+  - family-names: Chen
+    given-names: Haidong
+  - family-names: Xu
+    given-names: Linrui
+  - family-names: Liu
+    given-names: Xiaohao
+  - family-names: Shi
+    given-names: Chuancheng
+  - family-names: Xiao
+    given-names: Canran
+  - family-names: Zhang
+    given-names: Dan
+  - family-names: Shen
+    given-names: Fei
+  - family-names: Shen
+    given-names: Li
+  - family-names: Chua
+    given-names: Tat-Seng
+preferred-citation:
+  type: article
+  title: "Hub-Spectral Activation of Latent Multimodal Knowledge"
+  authors:
+    - family-names: Guo
+      given-names: Ying
+    - family-names: Chen
+      given-names: Haidong
+    - family-names: Xu
+      given-names: Linrui
+    - family-names: Liu
+      given-names: Xiaohao
+    - family-names: Shi
+      given-names: Chuancheng
+    - family-names: Xiao
+      given-names: Canran
+    - family-names: Zhang
+      given-names: Dan
+    - family-names: Shen
+      given-names: Fei
+    - family-names: Shen
+      given-names: Li
+    - family-names: Chua
+      given-names: Tat-Seng
+  journal: arXiv
+  year: 2026
+  month: 9
+  doi: "10.48550/arXiv.2609.17094"
+  url: "https://arxiv.org/abs/2609.17094"

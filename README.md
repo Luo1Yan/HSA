@@ -6,7 +6,7 @@
 
 Ying Guo, Haidong Chen, Linrui Xu, Xiaohao Liu, Chuancheng Shi, Canran Xiao, Dan Zhang, Fei Shen, Li Shen, Tat-Seng Chua
 
-[Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#datasets) · [Usage](#usage) · [Structure](#project-structure)
+[Paper](https://arxiv.org/abs/2609.17094) · [Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#datasets) · [Usage](#usage) · [Structure](#project-structure) · [Citation](#citation)
 
 </div>
 
@@ -32,9 +32,11 @@ HSA composes the two observed hub edges, identifies paired spectral carriers and
 
 Results reported in the paper. Retrieval averages both directions; classification averages accuracy across classes. Overall results weight each relation equally.
 
+The public runner covers the **HSA and frozen-cosine entries** in the main retrieval and classification tables. Other comparison methods, ablations and mechanism analyses require separate experiment code.
+
 ## Installation
 
-Requires Git, Conda and an NVIDIA GPU with a compatible driver. The commands below install the Python 3.10 environment and CUDA 12.1 build used by the standard extraction setup.
+The standard GPU extraction setup uses Git, Conda and an NVIDIA GPU with a compatible driver. The commands below install the Python 3.10 environment and CUDA 12.1 build used by this setup.
 
 ```bash
 git clone https://github.com/Luo1Yan/HSA.git
@@ -69,17 +71,30 @@ python run.py --dataset utd-mhad --check-data
 
 `download.py` shows the download plan without `--fetch`. Extraction resumes from completed features; `--force` regenerates them. Missing input files are reported in `datasets/checks/`.
 
+For existing feature archives, see the [feature format and evaluation instructions](docs/feature-format.md). Evaluation of prepared features only requires `requirements.txt`.
+
 ## Datasets
 
-Supported dataset names:
+| Dataset argument | Original-data source used by the entry point |
+|---|---|
+| `utd-mhad` | [UT Dallas](https://personal.utdallas.edu/~kehtar/UTD-MHAD.html) |
+| `ucf101` | [UCF101 mirror](https://huggingface.co/datasets/NoahMartinezXiang/2013_UCF101) |
+| `nyuv2` | [Depth mirror](https://huggingface.co/datasets/sayakpaul/nyu_depth_v2) and [official labeled data](https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html) |
+| `vggsound` | [Video mirror](https://huggingface.co/datasets/Loie/VGGSound) and [test-audio mirror](https://huggingface.co/datasets/txya900619/vggsound-16k) |
+| `tartan-rgbt` | [Official TartanRGBT release](https://huggingface.co/datasets/theairlabcmu/TartanRGBT) |
+| `batvision` | [Official BatVision release](https://doi.org/10.57745/HYLZNL) |
+| `mavd` | [Official MAVD release](https://multimodal-distill.cs.uni-freiburg.de/) |
+| `caltech-rgbt` | [Official Caltech Aerial RGBT release](https://data.caltech.edu/records/cks6g-ps927) |
+| `msrvtt` | [PMRL's original-data mirror](https://huggingface.co/datasets/xhLiu/MM_eval) |
+| `ego4d` | [Official access instructions](https://ego4d-data.org/docs/start-here/) |
 
-`utd-mhad`, `ucf101`, `nyuv2`, `vggsound`, `tartan-rgbt`, `batvision`, `mavd`, `caltech-rgbt`, `msrvtt`, `ego4d`.
+Dataset and checkpoint licenses remain those of their respective providers. See [third-party sources](THIRD_PARTY.md) and [text-template licenses](licenses/README.md).
 
 The download entry point includes the public data links and model weights. Public downloads require no Hugging Face account. **Ego4D requires [official access](https://ego4d-data.org/docs/start-here/)**: obtain the v2 full-scale videos, IMU CSVs and narration annotations, then place them under `datasets/raw/ego4d/`. Required video IDs and IMU filenames are listed in `configs/ego4d.json`.
 
 ### All main experiments
 
-After preparing Ego4D, run the following from the repository directory. Full video datasets require substantial storage; inspect the download plan before fetching.
+After preparing Ego4D, run the following from the repository directory. Full video datasets require substantial storage; the configured BatVision downloads alone total about 168.5 GB before extraction. Inspect the download plan before fetching.
 
 ```bash
 conda activate hsa
@@ -105,6 +120,12 @@ python run.py --check-data
 python run.py --device cuda --output outputs/main.json
 ```
 
+### Reproduction scope
+
+Evaluation on archived features has been verified for all 19 retrieval and 11 classification relations. Verification of the complete raw-data extraction and evaluation workflow currently covers UTD-MHAD. Full fresh acquisition and re-extraction of all ten datasets remains to be verified.
+
+LanguageBind video extraction fixes a random seed per observation. Historical UCF101 and TartanRGBT video caches have unrecorded random flips, so regenerated video features can differ from those historical vectors.
+
 ## Project structure
 
 ```text
@@ -117,12 +138,21 @@ HSA/
   configs/            # Sample IDs, splits, prompts and download sources
   environments/       # Extraction environment dependencies
   requirements.txt    # Dependencies for evaluation only
+  docs/               # Feature archive format and evaluation instructions
   tests/              # Automated checks
   assets/             # Overview and method figures
   licenses/           # License files
   datasets/           # Local raw data and features (generated)
   models/             # Local encoder source and weights (downloaded)
   outputs/            # Evaluation results (generated)
+```
+
+## Tests
+
+The protocol and download checks use synthetic fixtures and a local HTTP server:
+
+```bash
+python -m unittest discover -s tests -v
 ```
 
 ## Citation
@@ -134,7 +164,10 @@ HSA/
           Shi, Chuancheng and Xiao, Canran and Zhang, Dan and Shen, Fei and
           Shen, Li and Chua, Tat-Seng},
   year={2026},
-  note={Manuscript},
-  url={https://github.com/Luo1Yan/HSA}
+  eprint={2609.17094},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  doi={10.48550/arXiv.2609.17094},
+  url={https://arxiv.org/abs/2609.17094}
 }
 ```
