@@ -6,6 +6,8 @@
 
 Ying Guo, Haidong Chen, Linrui Xu, Xiaohao Liu, Chuancheng Shi, Canran Xiao, Dan Zhang, Fei Shen, Li Shen, Tat-Seng Chua
 
+English · [简体中文](README.zh-CN.md)
+
 [Paper](https://arxiv.org/abs/2609.17094) · [Features](https://huggingface.co/datasets/Rowance/HSA-features) · [Overview](#overview) · [Method](#method) · [Results](#main-results) · [Installation](#installation) · [Data](#datasets) · [Usage](#usage) · [Structure](#project-structure) · [Citation](#citation)
 
 </div>
