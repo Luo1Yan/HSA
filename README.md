@@ -34,8 +34,6 @@ HSA composes the two observed hub edges, identifies paired spectral carriers and
 
 Results reported in the paper. Retrieval averages both directions; classification averages accuracy across classes. Overall results weight each relation equally.
 
-The public runner covers the **HSA and frozen-cosine entries** in the main retrieval and classification tables. Other comparison methods, ablations and mechanism analyses require separate experiment code.
-
 ## Installation
 
 The standard GPU extraction setup uses Git, Conda and an NVIDIA GPU with a compatible driver. The commands below install the Python 3.10 environment and CUDA 12.1 build used by this setup.
