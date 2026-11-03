@@ -136,11 +136,7 @@ python run.py --check-data
 python run.py --device cuda --output outputs/main.json
 ```
 
-### Reproduction scope
-
-Evaluation on archived features has been verified for all 19 retrieval and 11 classification relations. Verification of the complete raw-data extraction and evaluation workflow currently covers UTD-MHAD. Full fresh acquisition and re-extraction of all ten datasets remains to be verified.
-
-LanguageBind video extraction fixes a random seed per observation. Historical UCF101 and TartanRGBT video caches have unrecorded random flips, so regenerated video features can differ from those historical vectors.
+LanguageBind video preprocessing includes random horizontal flips, so video features re-extracted from the original data can differ slightly from the [prepared features](#prepared-features).
 
 ## Project structure
 

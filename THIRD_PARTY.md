@@ -36,6 +36,5 @@ Compatibility adapters in `extract.py` preserve frozen checkpoint parameters.
   Template licenses are preserved in `licenses/`.
 
 See the [README data-source table](README.md#datasets) for the dataset providers'
-pages and [reproduction scope](README.md#reproduction-scope) for the verified
-workflows. Please cite the original datasets and encoders when using their
+pages. Please cite the original datasets and encoders when using their
 artifacts.

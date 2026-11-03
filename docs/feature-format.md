@@ -77,11 +77,7 @@ preparing retrieval features.
 `extract.py` writes a companion `.json` with the same basename as each archive.
 It records `experiment`, `protocol_sha256`, extraction version and source hash,
 environment, and train/test counts. Keep this file with the archive. When present,
-the runner checks `protocol_sha256` against the current configuration. Legacy
-archives without companion metadata can be evaluated; their configuration
-identity needs independent verification.
+the runner checks `protocol_sha256` against the current configuration.
 
 `--check-data` validates required arrays, finite values, compatible dimensions,
-labels, row counts and any available protocol digest. File checksums and sample
-provenance provide additional integrity checks for shared archives. Preserve the
-original metadata and review the recorded configuration when a digest differs.
+labels, row counts and any available protocol digest.
